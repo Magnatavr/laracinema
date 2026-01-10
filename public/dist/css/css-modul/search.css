@@ -1,0 +1,89 @@
+/* ===== SEARCH MODAL ===== */
+.search-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.85);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.search-modal.active {
+    display: flex;
+}
+
+.search-modal__content {
+    background: #111;
+    width: 90%;
+    max-width: 600px;
+    padding: 24px;
+    border-radius: 14px;
+    position: relative;
+}
+
+.search-modal__close {
+    position: absolute;
+    top: -40px;
+    right: -30px;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.search-modal__input {
+    width: 100%;
+    padding: 14px;
+    border-radius: 8px;
+    border: none;
+    background: #222;
+    color: #fff;
+    font-size: 16px;
+}
+
+.search-modal__results {
+    margin-top: 16px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.search-modal__item {
+    display: flex;
+    gap: 12px;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.search-modal__item:hover {
+    background: #1e1e1e;
+}
+
+.search-modal__item img {
+    width: 50px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.search-modal__item-title {
+    color: #fff;
+    font-size: 14px;
+}
+
+.search-modal__hint {
+    color: #777;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.search-modal__full-link {
+    display: block;
+    margin-top: 16px;
+    text-align: right;
+    color: #e50914;
+    text-decoration: none;
+}

@@ -1,0 +1,654 @@
+/* ====== PROFILE STYLES ====== */
+.profile-page {
+    padding: 100px 0;
+    background: #0f0f0f;
+    min-height: 100vh;
+    color: white;
+}
+
+/* Заголовок профиля */
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.profile-avatar {
+    position: relative;
+    width: 150px;
+    height: 150px;
+}
+
+.profile-avatar__img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid rgba(229, 9, 20, 0.3);
+}
+
+.profile-avatar__edit {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: #e50914;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-avatar__edit-link {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+.profile-info {
+    flex: 1;
+}
+
+.profile-name {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+    color: white;
+}
+
+.profile-email {
+    font-size: 1.1rem;
+    color: #aaa;
+    margin-bottom: 15px;
+}
+
+.profile-location {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #aaa;
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+}
+
+.profile-location i {
+    color: #e50914;
+}
+
+.profile-stats {
+    display: flex;
+    gap: 30px;
+}
+
+.profile-stat {
+    text-align: center;
+}
+
+.profile-stat__value {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #e50914;
+    margin-bottom: 5px;
+}
+
+.profile-stat__label {
+    font-size: 0.9rem;
+    color: #aaa;
+}
+
+/* Навигация профиля */
+.profile-nav {
+    display: flex;
+    gap: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 40px;
+}
+
+.profile-nav__link {
+    flex: 1;
+    padding: 15px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    color: #ccc;
+    text-decoration: none;
+    text-align: center;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border-bottom: 3px solid transparent;
+}
+
+.profile-nav__link:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.profile-nav__link.active {
+    background: rgba(229, 9, 20, 0.1);
+    color: white;
+    border-bottom-color: #e50914;
+}
+
+.profile-nav__link i {
+    margin-right: 8px;
+}
+
+/* Секции профиля */
+.profile-section {
+    margin-bottom: 40px;
+}
+
+.profile-section__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.profile-section__title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: white;
+}
+
+.profile-section__link {
+    color: #e50914;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+}
+
+.profile-section__link:hover {
+    color: #f40612;
+    text-decoration: underline;
+}
+
+.profile-section__link i {
+    margin-left: 5px;
+    font-size: 0.9rem;
+}
+
+/* Обо мне */
+.profile-about {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 8px;
+    line-height: 1.6;
+    color: #ddd;
+}
+
+/* Отзывы */
+.profile-reviews {
+    display: grid;
+    gap: 20px;
+}
+
+.profile-review {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.profile-review__movie {
+    display: flex;
+    gap: 15px;
+    text-decoration: none;
+    color: white;
+    margin-bottom: 15px;
+}
+
+.profile-review__poster {
+    width: 60px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+.profile-review__movie-info {
+    flex: 1;
+}
+
+.profile-review__title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.profile-review__rating {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #ffd700;
+    font-size: 0.9rem;
+}
+
+.profile-review__rating-value {
+    margin-left: 5px;
+    color: #aaa;
+}
+
+.profile-review__comment {
+    color: #ddd;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+.profile-review__date {
+    font-size: 0.85rem;
+    color: #888;
+}
+
+/* Избранные фильмы */
+.profile-favorites {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 20px;
+}
+
+.profile-favorite {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    text-decoration: none;
+    height: 200px;
+}
+
+.profile-favorite__poster {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.profile-favorite:hover .profile-favorite__poster {
+    transform: scale(1.05);
+}
+
+.profile-favorite__overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+    padding: 15px;
+    color: white;
+}
+
+.profile-favorite__title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 3px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.profile-favorite__year {
+    font-size: 0.85rem;
+    color: #aaa;
+}
+
+/* Страница редактирования */
+.profile-edit-page,
+.change-password-page {
+    padding: 40px 0;
+    background: #0f0f0f;
+    min-height: 100vh;
+    color: white;
+}
+
+.profile-edit-header,
+.change-password-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: 30px;
+}
+
+.page-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: white;
+}
+
+/* Формы */
+.profile-edit-form,
+.change-password-form {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.form-section {
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.form-section:last-child {
+    border-bottom: none;
+}
+
+.form-section__title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #ddd;
+}
+
+/* Аватар загрузка */
+.avatar-upload {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.avatar-upload__preview {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid rgba(229, 9, 20, 0.3);
+}
+
+.avatar-upload__preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.avatar-upload__label {
+    cursor: pointer;
+}
+
+.avatar-upload__input {
+    display: none;
+}
+
+/* Форма сетка */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #ddd;
+}
+
+.form-input,
+.form-textarea,
+.form-select {
+    width: 100%;
+    padding: 12px 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: white;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-input:focus,
+.form-textarea:focus,
+.form-select:focus {
+    outline: none;
+    border-color: #e50914;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.form-hint {
+    display: block;
+    margin-top: 5px;
+    font-size: 0.85rem;
+    color: #888;
+}
+
+/* Чекбокс */
+.form-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.form-checkbox__label {
+    color: #ddd;
+    font-size: 1rem;
+}
+
+.form-checkbox input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #e50914;
+    cursor: pointer;
+}
+
+/* Ошибки */
+.form-error {
+    display: block;
+    margin-top: 5px;
+    color: #ff6b6b;
+    font-size: 0.9rem;
+}
+
+/* Кнопки формы */
+.form-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.like-btn {
+    color: #ddd;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    background-color: inherit;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.like-btn:hover {
+
+    transform: translateY(-2px);
+}
+
+.btn--primary {
+    background: #e50914;
+    color: white;
+}
+
+.btn--primary:hover {
+    background: #f40612;
+    transform: translateY(-2px);
+}
+
+.btn--secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.btn--secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+
+    .profile-stats {
+        justify-content: center;
+    }
+
+    .profile-nav {
+        flex-direction: column;
+    }
+
+    .profile-favorites {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+
+    .avatar-upload {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+}
+
+.profile-comments-page{
+    padding: 100px 0;
+}
+.profile-comments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.profile-comment {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.profile-comments-info{
+    margin: 20px 0;
+}
+.profile-empty{
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+}
+.profile-comment__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.profile-comment__movie-link {
+    display: flex;
+    gap: 15px;
+    text-decoration: none;
+    color: white;
+    flex: 1;
+}
+
+.profile-comment__poster {
+    width: 60px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 6px;
+    flex-shrink: 0;
+}
+
+.profile-comment__movie-info {
+    flex: 1;
+}
+
+.profile-comment__movie-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.profile-comment__date {
+    font-size: 0.85rem;
+    color: #aaa;
+}
+
+.profile-comment__delete-btn {
+    background: rgba(255, 107, 107, 0.2);
+    border: none;
+    color: #ff6b6b;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.profile-comment__delete-btn:hover {
+    background: rgba(255, 107, 107, 0.3);
+    transform: scale(1.05);
+}
+
+.profile-comment__rating {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.profile-comment__rating-label {
+    color: #aaa;
+    font-size: 0.9rem;
+}
+
+.profile-comment__rating-stars {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    color: #ffd700;
+}
+
+.profile-comment__rating-value {
+    margin-left: 8px;
+    color: #ffd700;
+    font-weight: 600;
+}
+
+.profile-comment__text {
+    color: #ddd;
+    line-height: 1.5;
+}
+
+.profile-likes-page {
+    padding: 100px 0;
+}
+
+.profile-likes-info {
+    margin: 40px 0;
+}

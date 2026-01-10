@@ -1,0 +1,27 @@
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 20px;
+    background: #1a1a1a;
+    color: white;
+    border-radius: 8px;
+    border-left: 4px solid #e50914;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transform: translateX(120%);
+    transition: transform 0.3s ease;
+    z-index: 10000;
+    max-width: 300px;
+}
+
+.notification.show {
+    transform: translateX(0);
+}
+
+.notification--success {
+    border-left-color: #4CAF50;
+}
+
+.notification--error {
+    border-left-color: #ff6b6b;
+}

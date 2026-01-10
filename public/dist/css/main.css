@@ -1,0 +1,14 @@
+@import './css-modul/normalize.css';
+@import './css-modul/notification.css';
+@import './css-modul/header.css';
+@import './css-modul/hero.css';
+@import './css-modul/movies.css';
+@import './css-modul/auth.css';
+@import './css-modul/genres.css';
+@import './css-modul/profile.css';
+@import './css-modul/edit-profile.css';
+@import './css-modul/filter.css';
+@import './css-modul/review.css';
+@import './css-modul/search.css';
+@import './css-modul/footer.css';
+@import './css-modul/pagination.css';

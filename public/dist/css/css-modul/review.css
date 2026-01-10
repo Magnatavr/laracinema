@@ -1,0 +1,260 @@
+/* Основные стили формы */
+.review {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.review__header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.review__header h2 {
+    color: #fff;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.review__header p {
+    color: #b0b0b0;
+    font-size: 1rem;
+}
+
+/* Группы полей */
+.review__group {
+    margin-bottom: 1.5rem;
+}
+
+.review__label {
+    display: block;
+    color: #fff;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.required {
+    color: #ff4757;
+}
+
+/* Контейнер для оценки */
+/* Контейнер для оценки */
+.rating-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    position: relative;
+}
+
+.review__select {
+    width: 100%;
+    max-width: 200px;
+    padding: 0.75rem 1rem;
+    background: rgba(30, 30, 46, 0.9);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23fff' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 12px;
+}
+
+/* Стили для выпадающего списка */
+.review__select option {
+    background-color: #1a1a2e;
+    color: #fff;
+    padding: 10px;
+}
+
+.review__select option:hover,
+.review__select option:focus,
+.review__select option:checked {
+    background-color: #6c5ce7;
+    color: white;
+}
+
+.review__select:focus {
+    outline: none;
+    border-color: #6c5ce7;
+    box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.2);
+}
+
+.review__select:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+}
+/* Предпросмотр оценки */
+.rating-preview {
+    padding: 0.5rem 1rem;
+    background: rgba(108, 92, 231, 0.2);
+    border-radius: 10px;
+    color: #fff;
+    font-size: 1rem;
+    min-width: 80px;
+    text-align: center;
+}
+
+.rating-value {
+    font-weight: 600;
+    color: #6c5ce7;
+    font-size: 1.2rem;
+}
+
+/* Текстовое поле */
+.review__textarea {
+    width: 100%;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    color: #fff;
+    font-size: 1rem;
+    resize: vertical;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.review__textarea:focus {
+    outline: none;
+    border-color: #6c5ce7;
+    box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.2);
+}
+
+.review__textarea:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.review__textarea::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Счетчик символов */
+.char-counter {
+    text-align: right;
+    margin-top: 0.5rem;
+    color: #b0b0b0;
+    font-size: 0.9rem;
+}
+
+.char-count {
+    color: #fff;
+    font-weight: 500;
+}
+
+/* Кнопки */
+.review__actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.review__submit {
+    flex: 1;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, #6c5ce7 0%, #8b7ce6 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.review__submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(108, 92, 231, 0.4);
+}
+
+.review__submit:active {
+    transform: translateY(0);
+}
+
+.review__reset {
+    padding: 1rem 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.review__reset:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Уведомление */
+.form-notice {
+    text-align: center;
+    margin-top: 1.5rem;
+    color: #b0b0b0;
+    font-size: 0.9rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Анимации */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.review {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .review {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+
+    .rating-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .review__select {
+        max-width: 100%;
+    }
+
+    .review__actions {
+        flex-direction: column;
+    }
+
+    .review__header h2 {
+        font-size: 1.5rem;
+    }
+}
+
+/* Стили для иконки отправки */
+.submit-icon {
+    transition: transform 0.3s ease;
+}
+
+.review__submit:hover .submit-icon {
+    transform: translateX(3px);
+}
