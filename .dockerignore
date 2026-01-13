@@ -1,0 +1,17 @@
+# .dockerignore
+tmp/
+node_modules/
+vendor/
+storage/*.key
+.env
+.git/
+.gitignore
+docker-compose.yml
+docker-compose.override.yml
+*.log
+*.sql
+*.tar
+*.gz
+*.zip
+.DS_Store
+Thumbs.db

@@ -1,0 +1,40 @@
+
+services:
+  nginx:
+    build:
+     context: .
+     dockerfile: docker/production/nginx/conf.d/Dockerfile
+    ports:
+      - "8080:80"
+    depends_on:
+      - app
+
+    container_name: app_nginx
+
+
+  app:
+    build:
+      context: .
+      dockerfile: docker/common/php-fpm/Dockerfile
+    volumes:
+      - ./:/var/www
+    depends_on:
+      - db
+    container_name: app
+
+
+  db:
+    image: mysql:8.0
+    restart: always
+    volumes:
+      - ./tmp/db:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: laracinema
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "8101:3306"
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
+    container_name: app_db
+
+
+

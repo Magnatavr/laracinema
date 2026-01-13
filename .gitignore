@@ -22,3 +22,16 @@
 Homestead.json
 Homestead.yaml
 Thumbs.db
+
+
+/tmp/
+*.sock
+/database/database.sqlite
+/database/database.sqlite-journal
+/bootstrap/cache/*
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/testing/*
+/storage/framework/views/*
+/.env.example.local
+docker-compose.override.yml
