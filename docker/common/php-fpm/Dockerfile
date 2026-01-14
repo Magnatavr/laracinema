@@ -1,12 +1,11 @@
-# Stage 1: Build environment and Composer dependencies
+# Stage 1: Build environment with ALL dependencies
 FROM php:8.2-fpm AS builder
 
-# Install system dependencies and PHP extensions for Laravel with MySQL/PostgreSQL support.
-# Dependencies in this stage are only required for building the final image.
-# Node.js and asset building are handled in the Nginx stage, not here.
+# Install ALL system dependencies including Node.js
 RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     unzip \
+    git \
     libpq-dev \
     libonig-dev \
     libssl-dev \
@@ -14,6 +13,15 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libcurl4-openssl-dev \
     libicu-dev \
     libzip-dev \
+    # Добавляем Node.js и npm
+    nodejs \
+    npm \
+    # Добавляем дополнительные инструменты
+    gnupg \
+    ca-certificates \
+    && curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs \
+    && npm install -g npm@11.7.0 \
     && docker-php-ext-install -j$(nproc) \
     pdo_mysql \
     pdo_pgsql \
@@ -27,41 +35,41 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && docker-php-ext-enable redis \
     && apt-get autoremove -y && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# Set the working directory inside the container
+# Set the working directory
 WORKDIR /var/www
 
-# Copy the entire Laravel application code into the container
-# -----------------------------------------------------------
-# In Laravel, `composer install` may trigger scripts
-# needing access to application code.
-# For example, the `post-autoload-dump` event might execute
-# Artisan commands like `php artisan package:discover`. If the
-# application code (including the `artisan` file) is not
-# present, these commands will fail, leading to build errors.
-#
-# By copying the entire application code before running
-# `composer install`, we ensure that all necessary files are
-# available, allowing these scripts to run successfully.
-# In other cases, it would be possible to copy composer files
-# first, to leverage Docker's layer caching mechanism.
-# -----------------------------------------------------------
+# Copy the entire Laravel application
 COPY . /var/www
 
-# Install Composer and dependencies
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
-    && composer install --no-dev --optimize-autoloader --no-interaction --no-progress --prefer-dist
+# Install Composer globally
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Stage 2: Production environment
+# Install PHP dependencies
+RUN composer install --no-dev --optimize-autoloader --no-interaction --no-progress --prefer-dist
+
+# Install Node.js dependencies and build assets (если нужно)
+RUN if [ -f "package.json" ]; then \
+    npm ci && \
+    npm run build; \
+    fi
+
+# Stage 2: Production environment with ALL dependencies
 FROM php:8.2-fpm AS production
 
-# Install only runtime libraries needed in production
-# libfcgi-bin and procps are required for the php-fpm-healthcheck script
+# Install runtime libraries + Node.js
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libpq-dev \
     libicu-dev \
     libzip-dev \
     libfcgi-bin \
     procps \
+    # Добавляем Node.js в production stage
+    curl \
+    gnupg \
+    ca-certificates \
+    && curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs \
+    && npm install -g npm@11.7.0 \
     && apt-get autoremove -y && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Download and install php-fpm health check script
@@ -73,30 +81,31 @@ RUN curl -o /usr/local/bin/php-fpm-healthcheck \
 COPY ./docker/production/php-fpm/entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
-# Copy the initial storage structure
-COPY ./storage /var/www/storage-init
-
 # Copy PHP extensions and libraries from the builder stage
 COPY --from=builder /usr/local/lib/php/extensions/ /usr/local/lib/php/extensions/
 COPY --from=builder /usr/local/etc/php/conf.d/ /usr/local/etc/php/conf.d/
 COPY --from=builder /usr/local/bin/docker-php-ext-* /usr/local/bin/
+COPY --from=builder /usr/local/bin/composer /usr/local/bin/composer
 
-# Use the recommended production PHP configuration
-# -----------------------------------------------------------
-# PHP provides development and production configurations.
-# Here, we replace the default php.ini with the production
-# version to apply settings optimized for performance and
-# security in a live environment.
-# -----------------------------------------------------------
+# Copy the application code and ALL dependencies from the build stage
+COPY --from=builder /var/www /var/www
+
+# Use production PHP configuration
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
-# Enable PHP-FPM status page by modifying zz-docker.conf with sed
+# Enable PHP-FPM status page
 RUN sed -i '/\[www\]/a pm.status_path = /status' /usr/local/etc/php-fpm.d/zz-docker.conf
-# Update the variables_order to include E (for ENV)
-#RUN sed -i 's/variables_order = "GPCS"/variables_order = "EGPCS"/' "$PHP_INI_DIR/php.ini"
 
-# Copy the application code and dependencies from the build stage
-COPY --from=builder /var/www /var/www
+# Добавляем кастомные настройки PHP - ФИКСИРУЕМ СИНТАКСИС
+RUN echo "memory_limit = 512M" >> /usr/local/etc/php/conf.d/custom.ini && \
+    echo "upload_max_filesize = 500M" >> /usr/local/etc/php/conf.d/custom.ini && \
+    echo "post_max_size = 500M" >> /usr/local/etc/php/conf.d/custom.ini && \
+    echo "max_execution_time = 600" >> /usr/local/etc/php/conf.d/custom.ini
+
+# Добавляем дополнительные важные настройки
+RUN echo "max_input_time = 600" >> /usr/local/etc/php/conf.d/custom.ini && \
+    echo "max_input_vars = 3000" >> /usr/local/etc/php/conf.d/custom.ini && \
+    echo "realpath_cache_size = 4096K" >> /usr/local/etc/php/conf.d/custom.ini
 
 # Set working directory
 WORKDIR /var/www
@@ -104,12 +113,12 @@ WORKDIR /var/www
 # Ensure correct permissions
 RUN chown -R www-data:www-data /var/www
 
-# Switch to the non-privileged user to run the application
+# Switch to non-privileged user
 USER www-data
 
 # Change the default command to run the entrypoint script
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 
-# Expose port 9000 and start php-fpm server
+# Expose port 9000
 EXPOSE 9000
 CMD ["php-fpm"]

@@ -6,6 +6,8 @@ services:
      dockerfile: docker/production/nginx/conf.d/Dockerfile
     ports:
       - "8080:80"
+    volumes:
+      - ./:/var/www:ro
     depends_on:
       - app
 
@@ -18,6 +20,14 @@ services:
       dockerfile: docker/common/php-fpm/Dockerfile
     volumes:
       - ./:/var/www
+    ports:
+      - "5173:5173"
+    environment:
+      - PHP_MEMORY_LIMIT=512M
+      - PHP_UPLOAD_MAX_FILESIZE=500M
+      - PHP_POST_MAX_SIZE=500M
+      - PHP_MAX_EXECUTION_TIME=300
+
     depends_on:
       - db
     container_name: app
